@@ -1,0 +1,580 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ─── Enums ───────────────────────────────────────────────────────────────────
+
+enum TenantStatus {
+  PENDING
+  ACTIVE
+  SUSPENDED
+}
+
+enum UserRole {
+  SUPER_ADMIN
+  CHURCH_ADMIN
+  BRANCH_MANAGER
+  PASTOR
+}
+
+enum RecurringType {
+  DAILY
+  WEEKLY
+  MONTHLY
+  YEARLY
+}
+
+enum AttendanceType {
+  FIRST_TIMER
+  SUNDAY_SERVICE
+  MIDWEEK_SERVICE
+  CONFERENCE
+  EVENT
+}
+
+enum SubscriptionStatus {
+  ACTIVE
+  PAST_DUE
+  CANCELLED
+  TRIAL
+  SKIPPED
+}
+
+enum PaymentStatus {
+  PENDING
+  SUCCESS
+  FAILED
+}
+
+enum InvoiceStatus {
+  DRAFT
+  SENT
+  PAID
+  OVERDUE
+  CANCELLED
+}
+
+enum CampaignStatus {
+  DRAFT
+  SCHEDULED
+  SENT
+  FAILED
+}
+
+enum NotificationType {
+  ATTENDANCE_SUBMITTED
+  PAYMENT_SUCCESS
+  SUBSCRIPTION_EXPIRING
+  GENERAL
+}
+
+enum WorkerDepartment {
+  USHERS
+  CHOIR
+  PROTOCOL
+  TECHNICAL
+  CHILDRENS_CHURCH
+}
+
+enum DayOfWeek {
+  SUNDAY
+  MONDAY
+  TUESDAY
+  WEDNESDAY
+  THURSDAY
+  FRIDAY
+  SATURDAY
+}
+
+// ─── Better Auth core tables ─────────────────────────────────────────────────
+
+model User {
+  id            String    @id @default(cuid())
+  name          String
+  email         String    @unique
+  emailVerified Boolean   @default(false)
+  image         String?
+  role          UserRole  @default(CHURCH_ADMIN)
+  tenantId      String?
+  branchId      String?
+  phone         String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  tenant        Tenant?   @relation(fields: [tenantId], references: [id], onDelete: SetNull)
+  branch        Branch?   @relation(fields: [branchId], references: [id], onDelete: SetNull)
+  sessions      Session[]
+  accounts      Account[]
+  notifications Notification[]
+  pastorProfile Pastor?
+  invitations   Invitation[] @relation("InvitedBy")
+
+  @@index([tenantId])
+  @@index([branchId])
+  @@map("user")
+}
+
+model Session {
+  id        String   @id @default(cuid())
+  expiresAt DateTime
+  token     String   @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  ipAddress String?
+  userAgent String?
+  userId    String
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@map("session")
+}
+
+model Account {
+  id                    String    @id @default(cuid())
+  accountId             String
+  providerId            String
+  userId                String
+  accessToken           String?
+  refreshToken          String?
+  idToken               String?
+  accessTokenExpiresAt  DateTime?
+  refreshTokenExpiresAt DateTime?
+  scope                 String?
+  password              String?
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@map("account")
+}
+
+model Verification {
+  id         String   @id @default(cuid())
+  identifier String
+  value      String
+  expiresAt  DateTime
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@map("verification")
+}
+
+// ─── Multi-tenant core ───────────────────────────────────────────────────────
+
+model Tenant {
+  id        String       @id @default(cuid())
+  status    TenantStatus @default(PENDING)
+  createdAt DateTime     @default(now())
+  updatedAt DateTime     @updatedAt
+
+  church            Church?
+  users             User[]
+  branches          Branch[]
+  services          Service[]
+  programs          Program[]
+  attendances       Attendance[]
+  attendanceSubmissions AttendanceSubmission[]
+  pastors           Pastor[]
+  workers           Worker[]
+  subscriptions     Subscription[]
+  invoices          Invoice[]
+  payments          Payment[]
+  announcements     Announcement[]
+  emailCampaigns    EmailCampaign[]
+  smsCampaigns      SmsCampaign[]
+  notifications     Notification[]
+  reports           Report[]
+  invitations       Invitation[]
+
+  @@map("tenant")
+}
+
+model Church {
+  id             String   @id @default(cuid())
+  tenantId       String   @unique
+  name           String
+  slug           String   @unique
+  orgEmail       String   @unique
+  logo           String?
+  banner         String?
+  slogan         String?
+  primaryColor   String   @default("#EF9F27")
+  secondaryColor String   @default("#1D9E75")
+  welcomeMessage String?
+  onboardingComplete Boolean @default(false)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  tenant Tenant @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+
+  @@map("church")
+}
+
+// ─── Platform modules & subscriptions ──────────────────────────────────────
+
+model Module {
+  id          String   @id @default(cuid())
+  name        String   @unique
+  slug        String   @unique
+  description String
+  icon        String
+  annualPrice Int
+  isActive    Boolean  @default(true)
+  sortOrder   Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  subscriptionModules SubscriptionModule[]
+
+  @@map("module")
+}
+
+model Subscription {
+  id        String             @id @default(cuid())
+  tenantId  String
+  status    SubscriptionStatus @default(TRIAL)
+  startDate DateTime           @default(now())
+  endDate   DateTime?
+  totalAmount Int              @default(0)
+  paystackReference String?
+  createdAt DateTime           @default(now())
+  updatedAt DateTime           @updatedAt
+
+  tenant  Tenant               @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  modules SubscriptionModule[]
+  invoices Invoice[]
+  payments Payment[]
+
+  @@index([tenantId])
+  @@map("subscription")
+}
+
+model SubscriptionModule {
+  id             String @id @default(cuid())
+  subscriptionId String
+  moduleId       String
+  priceAtPurchase Int
+
+  subscription Subscription @relation(fields: [subscriptionId], references: [id], onDelete: Cascade)
+  module       Module       @relation(fields: [moduleId], references: [id], onDelete: Cascade)
+
+  @@unique([subscriptionId, moduleId])
+  @@map("subscription_module")
+}
+
+model Invoice {
+  id             String        @id @default(cuid())
+  tenantId       String
+  subscriptionId String?
+  invoiceNumber  String        @unique
+  amount         Int
+  status         InvoiceStatus @default(DRAFT)
+  dueDate        DateTime?
+  paidAt         DateTime?
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+
+  tenant       Tenant        @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  subscription Subscription? @relation(fields: [subscriptionId], references: [id], onDelete: SetNull)
+  payments     Payment[]
+
+  @@index([tenantId])
+  @@map("invoice")
+}
+
+model Payment {
+  id                String        @id @default(cuid())
+  tenantId          String
+  subscriptionId    String?
+  invoiceId         String?
+  amount            Int
+  status            PaymentStatus @default(PENDING)
+  paystackReference String?
+  paystackResponse  Json?
+  createdAt         DateTime      @default(now())
+  updatedAt         DateTime      @updatedAt
+
+  tenant       Tenant        @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  subscription Subscription? @relation(fields: [subscriptionId], references: [id], onDelete: SetNull)
+  invoice      Invoice?      @relation(fields: [invoiceId], references: [id], onDelete: SetNull)
+
+  @@index([tenantId])
+  @@map("payment")
+}
+
+// ─── Branch & service management ─────────────────────────────────────────────
+
+model Branch {
+  id              String   @id @default(cuid())
+  tenantId        String
+  name            String
+  country         String
+  state           String
+  localGovernment String
+  address         String
+  phone           String?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  tenant   Tenant    @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  users    User[]
+  services Service[]
+  programs Program[]
+  pastors  Pastor[]
+  workers  Worker[]
+  attendances Attendance[]
+
+  @@index([tenantId])
+  @@map("branch")
+}
+
+model Service {
+  id            String        @id @default(cuid())
+  tenantId      String
+  branchId      String
+  name          String
+  description   String?
+  banner        String?
+  dayOfWeek     DayOfWeek
+  time          String
+  recurringType RecurringType @default(WEEKLY)
+  isActive      Boolean       @default(true)
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+
+  tenant      Tenant       @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  branch      Branch       @relation(fields: [branchId], references: [id], onDelete: Cascade)
+  attendances Attendance[]
+
+  @@index([tenantId])
+  @@index([branchId])
+  @@map("service")
+}
+
+model Program {
+  id          String   @id @default(cuid())
+  tenantId    String
+  branchId    String
+  title       String
+  description String?
+  startDate   DateTime
+  endDate     DateTime
+  banner      String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  tenant      Tenant       @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  branch      Branch       @relation(fields: [branchId], references: [id], onDelete: Cascade)
+  attendances Attendance[]
+
+  @@index([tenantId])
+  @@index([branchId])
+  @@map("program")
+}
+
+// ─── Attendance ──────────────────────────────────────────────────────────────
+
+model Attendance {
+  id          String         @id @default(cuid())
+  tenantId    String
+  branchId    String?
+  serviceId   String?
+  programId   String?
+  title       String
+  type        AttendanceType
+  slug        String         @unique
+  qrCodeUrl   String?
+  isActive    Boolean        @default(true)
+  startsAt    DateTime?
+  endsAt      DateTime?
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+
+  tenant      Tenant                 @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  branch      Branch?                @relation(fields: [branchId], references: [id], onDelete: SetNull)
+  service     Service?               @relation(fields: [serviceId], references: [id], onDelete: SetNull)
+  program     Program?               @relation(fields: [programId], references: [id], onDelete: SetNull)
+  submissions AttendanceSubmission[]
+
+  @@index([tenantId])
+  @@map("attendance")
+}
+
+model AttendanceSubmission {
+  id           String   @id @default(cuid())
+  tenantId     String
+  attendanceId String
+  fullName     String
+  phone        String
+  email        String?
+  gender       String?
+  isFirstTimer Boolean  @default(false)
+  submittedAt  DateTime @default(now())
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  tenant     Tenant     @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  attendance Attendance @relation(fields: [attendanceId], references: [id], onDelete: Cascade)
+
+  @@index([tenantId])
+  @@index([attendanceId])
+  @@map("attendance_submission")
+}
+
+// ─── People ──────────────────────────────────────────────────────────────────
+
+model Pastor {
+  id        String   @id @default(cuid())
+  tenantId  String
+  branchId  String
+  userId    String?  @unique
+  name      String
+  email     String
+  phone     String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  tenant Tenant @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  branch Branch @relation(fields: [branchId], references: [id], onDelete: Cascade)
+  user   User?  @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  @@index([tenantId])
+  @@map("pastor")
+}
+
+model Worker {
+  id         String           @id @default(cuid())
+  tenantId   String
+  branchId   String
+  name       String
+  email      String?
+  phone      String?
+  department WorkerDepartment
+  createdAt  DateTime         @default(now())
+  updatedAt  DateTime         @updatedAt
+
+  tenant Tenant @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  branch Branch @relation(fields: [branchId], references: [id], onDelete: Cascade)
+
+  @@index([tenantId])
+  @@map("worker")
+}
+
+model Invitation {
+  id        String   @id @default(cuid())
+  tenantId  String
+  token     String   @unique @default(cuid())
+  email     String
+  role      UserRole
+  branchId  String?
+  invitedBy String
+  expiresAt DateTime
+  acceptedAt DateTime?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  tenant  Tenant @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  inviter User   @relation("InvitedBy", fields: [invitedBy], references: [id], onDelete: Cascade)
+
+  @@index([tenantId])
+  @@map("invitation")
+}
+
+// ─── Communications ──────────────────────────────────────────────────────────
+
+model Announcement {
+  id        String   @id @default(cuid())
+  tenantId  String
+  title     String
+  content   String
+  isPublished Boolean @default(false)
+  publishedAt DateTime?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  tenant Tenant @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+
+  @@index([tenantId])
+  @@map("announcement")
+}
+
+model EmailCampaign {
+  id          String         @id @default(cuid())
+  tenantId    String
+  subject     String
+  body        String
+  status      CampaignStatus @default(DRAFT)
+  filters     Json?
+  recipientCount Int         @default(0)
+  sentAt      DateTime?
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+
+  tenant Tenant @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+
+  @@index([tenantId])
+  @@map("email_campaign")
+}
+
+model SmsCampaign {
+  id          String         @id @default(cuid())
+  tenantId    String
+  message     String
+  status      CampaignStatus @default(DRAFT)
+  filters     Json?
+  recipientCount Int         @default(0)
+  sentAt      DateTime?
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+
+  tenant Tenant @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+
+  @@index([tenantId])
+  @@map("sms_campaign")
+}
+
+// ─── Notifications & reports ─────────────────────────────────────────────────
+
+model Notification {
+  id        String           @id @default(cuid())
+  tenantId  String
+  userId    String
+  type      NotificationType
+  title     String
+  message   String
+  isRead    Boolean          @default(false)
+  link      String?
+  createdAt DateTime         @default(now())
+  updatedAt DateTime         @updatedAt
+
+  tenant Tenant @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([tenantId])
+  @@index([userId])
+  @@map("notification")
+}
+
+model Report {
+  id        String   @id @default(cuid())
+  tenantId  String
+  title     String
+  type      String
+  filters   Json?
+  fileUrl   String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  tenant Tenant @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+
+  @@index([tenantId])
+  @@map("report")
+}
