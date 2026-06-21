@@ -9,6 +9,8 @@ import {
   PricingCTA,
 } from "@/components/landing/pricing-sections";
 
+export const dynamic = "force-static";
+
 export const metadata = {
   title: "Pricing",
   description:

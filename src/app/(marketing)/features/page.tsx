@@ -8,6 +8,8 @@ import {
   FeaturesCTA,
 } from "@/components/landing/features-sections";
 
+export const dynamic = "force-static";
+
 export const metadata = {
   title: "Features",
   description:

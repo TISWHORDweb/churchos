@@ -12,6 +12,8 @@ import {
   HomeCTA,
 } from "@/components/landing/home-sections";
 
+export const dynamic = "force-static";
+
 export default function HomePage() {
   return (
     <>

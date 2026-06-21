@@ -7,6 +7,8 @@ import {
   StoriesCTA,
 } from "@/components/landing/stories-sections";
 
+export const dynamic = "force-static";
+
 export const metadata = {
   title: "Stories",
   description:
