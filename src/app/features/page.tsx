@@ -1,3 +1,4 @@
+import { MarketingPageShell } from "@/components/layout/marketing-page-shell";
 import { PageHero } from "@/components/landing/page-hero";
 import { LandingFeatures } from "@/components/landing/sections";
 import {
@@ -18,7 +19,7 @@ export const metadata = {
 
 export default function FeaturesPage() {
   return (
-    <>
+    <MarketingPageShell>
       <PageHero
         kicker="Features"
         title="Every module maps to a workflow your team already runs"
@@ -30,6 +31,6 @@ export default function FeaturesPage() {
       <FeaturesRolesSection />
       <FeaturesIntegrations />
       <FeaturesCTA />
-    </>
+    </MarketingPageShell>
   );
 }

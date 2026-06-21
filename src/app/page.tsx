@@ -1,3 +1,4 @@
+import { MarketingPageShell } from "@/components/layout/marketing-page-shell";
 import {
   LandingHero,
   HomeExploreLinks,
@@ -16,7 +17,7 @@ export const dynamic = "force-static";
 
 export default function HomePage() {
   return (
-    <>
+    <MarketingPageShell>
       <LandingHero />
       <HomeStatsStrip />
       <HomeWeeklyWorkflow />
@@ -26,6 +27,6 @@ export default function HomePage() {
       <HomeExploreLinks />
       <HomeFAQ />
       <HomeCTA />
-    </>
+    </MarketingPageShell>
   );
 }

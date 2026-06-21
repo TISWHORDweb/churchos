@@ -1,3 +1,4 @@
+import { MarketingPageShell } from "@/components/layout/marketing-page-shell";
 import { PageHero } from "@/components/landing/page-hero";
 import { LandingTestimonials } from "@/components/landing/sections";
 import {
@@ -17,7 +18,7 @@ export const metadata = {
 
 export default function StoriesPage() {
   return (
-    <>
+    <MarketingPageShell>
       <PageHero
         kicker="Stories"
         title="Real churches, real numbers, real admin teams"
@@ -28,6 +29,6 @@ export default function StoriesPage() {
       <StoriesCaseStudies />
       <StoriesByChurchSize />
       <StoriesCTA />
-    </>
+    </MarketingPageShell>
   );
 }

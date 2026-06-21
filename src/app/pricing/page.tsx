@@ -1,3 +1,4 @@
+import { MarketingPageShell } from "@/components/layout/marketing-page-shell";
 import { PageHero } from "@/components/landing/page-hero";
 import { LandingPricing } from "@/components/landing/sections";
 import { getModulesForPage } from "@/lib/modules";
@@ -21,7 +22,7 @@ export default async function PricingPage() {
   const modules = await getModulesForPage();
 
   return (
-    <>
+    <MarketingPageShell>
       <PageHero
         kicker="Pricing"
         title="Module-based annual billing — no per-seat surprises"
@@ -33,6 +34,6 @@ export default async function PricingPage() {
       <PricingIncluded />
       <PricingFAQ />
       <PricingCTA />
-    </>
+    </MarketingPageShell>
   );
 }

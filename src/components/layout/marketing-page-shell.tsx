@@ -1,7 +1,7 @@
 import { MarketingNav } from "@/components/landing/marketing-nav";
 import { LandingFooter } from "@/components/landing/sections";
 
-export default function MarketingLayout({
+export function MarketingPageShell({
   children,
 }: {
   children: React.ReactNode;
