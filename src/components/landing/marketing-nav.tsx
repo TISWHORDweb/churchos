@@ -53,7 +53,7 @@ export function MarketingNav({ heroOverlay = false }: { heroOverlay?: boolean })
   const actionClass = navLinkClass(false);
 
   return (
-    <header className="pointer-events-none sticky top-0 z-50 bg-transparent px-4 pt-4 sm:px-6">
+    <header className="pointer-events-none sticky top-0 z-50 bg-transparent px-4 pt-3 sm:px-6">
       <div className="pointer-events-auto mx-auto max-w-6xl">
         <div
           className={cn(

@@ -3,6 +3,7 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { SectionHeader } from "@/components/landing/section-header";
 import { images } from "@/lib/images";
+import { imageLoadingProps } from "@/lib/image-loading";
 import {
   Building2,
   Calendar,
@@ -161,6 +162,7 @@ export function FeaturesWorkflowDeepDives() {
                 fill
                 className="object-cover"
                 sizes="(max-width: 1024px) 100vw, 50vw"
+                {...imageLoadingProps("lazy")}
               />
             </div>
           </div>

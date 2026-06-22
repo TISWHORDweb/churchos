@@ -13,7 +13,7 @@ export const images = {
   church: asset("/church.jpg"),
   insideChurch: asset("/inside-church.jpg"),
   congregation: asset("/congregation-worshipping.jpg"),
-  congregationAlt: asset("/congregation-worshipping2.jpg"),
+  congregationAlt: asset("/ongoing-service.jpg"),
   worship: asset("/worship.jpg"),
   praying: asset("/praying.jpg"),
   blackWorship: asset("/black-worship.jpeg"),
@@ -22,5 +22,5 @@ export const images = {
   auth: asset("/inside-church.jpg"),
   featuresHero: asset("/worship.jpg"),
   pricingHero: asset("/congregation-worshipping.jpg"),
-  storiesHero: asset("/congregation-worshipping2.jpg"),
+  storiesHero: asset("/ongoing-service.jpg"),
 } as const;

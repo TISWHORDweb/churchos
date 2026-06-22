@@ -3,6 +3,7 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { SectionHeader } from "@/components/landing/section-header";
 import { images } from "@/lib/images";
+import { imageLoadingProps } from "@/lib/image-loading";
 
 const impactStats = [
   { value: "14,200", label: "Check-ins in one quarter", church: "Grace Assembly" },
@@ -108,6 +109,7 @@ export function StoriesCaseStudies() {
                   fill
                   className="object-cover"
                   sizes="(max-width: 1024px) 100vw, 400px"
+                  {...imageLoadingProps("lazy")}
                 />
               </div>
               <div
@@ -216,6 +218,7 @@ export function StoriesCTA() {
               fill
               className="object-cover"
               sizes="50vw"
+              {...imageLoadingProps("lazy")}
             />
           </div>
           <div className="flex flex-col justify-center p-8 lg:p-12">

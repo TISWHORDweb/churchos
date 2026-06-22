@@ -6,12 +6,13 @@ import { useCallback, useEffect, useState } from "react";
 import { ChevronLeft, ChevronRight, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { images } from "@/lib/images";
+import { imageLoadingProps, preloadImages } from "@/lib/image-loading";
 import { cn } from "@/lib/utils";
 
 const slides = [
   {
-    image: images.praying,
-    alt: "People praying together",
+    image: images.blackWorship,
+    alt: "Congregation during worship",
     kicker: "Church management SaaS",
     title: "Run every branch, service and Sunday from one place",
     description:
@@ -19,8 +20,8 @@ const slides = [
     stat: { label: "Live check-ins today", value: "247" },
   },
   {
-    image: images.blackWorship,
-    alt: "Congregation during worship",
+    image: images.hero,
+    alt: "Congregation during a church service",
     kicker: "QR attendance",
     title: "Visitors check in under 15 seconds — no app download",
     description:
@@ -53,6 +54,10 @@ export function HeroSlider() {
   }, []);
 
   useEffect(() => {
+    preloadImages(slides.map((s) => s.image));
+  }, []);
+
+  useEffect(() => {
     if (isPaused) return;
     const id = setInterval(next, INTERVAL_MS);
     return () => clearInterval(id);
@@ -66,33 +71,31 @@ export function HeroSlider() {
       aria-roledescription="carousel"
       aria-label="ChurchOS highlights"
     >
-      {/* Background slides */}
       {slides.map((slide, i) => (
         <div
           key={slide.title}
           className={cn(
-            "absolute inset-0 transition-opacity duration-700 ease-out",
+            "absolute -top-px left-0 right-0 bottom-0 transition-opacity duration-700 ease-out",
             i === active ? "opacity-100" : "opacity-0"
           )}
           aria-hidden={i !== active}
         >
           <Image
             src={slide.image}
-            alt=""
+            alt={slide.alt}
             fill
-            priority={i === 0}
+            sizes="100vw"
             className={cn(
               "object-cover transition-transform duration-[8000ms] ease-out",
               i === active && "scale-105"
             )}
-            sizes="100vw"
+            {...imageLoadingProps(i === 0 ? "hero" : "lazy")}
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-black/45 via-black/30 to-black/10 dark:from-gold-900/55 dark:via-gold-700/35 dark:to-gold-500/15" />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-black/10 dark:from-gold-900/45 dark:via-transparent dark:to-gold-900/15" />
+          <div className="hero-overlay-h absolute inset-0" />
+          <div className="hero-overlay-v absolute inset-0" />
         </div>
       ))}
 
-      {/* Content */}
       <div className="relative mx-auto flex min-h-[92vh] max-w-6xl flex-col justify-end px-6 pb-16 pt-32 lg:justify-center lg:pb-24 lg:pt-40">
         <div className="max-w-2xl">
           {slides.map((slide, i) => (
@@ -112,7 +115,7 @@ export function HeroSlider() {
               <h1 className="mt-4 font-display text-[32px] font-semibold leading-[1.08] tracking-tight text-white sm:text-[40px] lg:text-[52px]">
                 {slide.title}
               </h1>
-              <p className="mt-5 max-w-xl text-base leading-relaxed text-white/75 sm:text-lg">
+              <p className="mt-5 max-w-xl text-base leading-relaxed text-white/90 sm:text-lg">
                 {slide.description}
               </p>
               <div className="mt-8 flex flex-wrap items-center gap-3">
@@ -132,7 +135,6 @@ export function HeroSlider() {
           ))}
         </div>
 
-        {/* Stat chip — updates per slide */}
         <div className="mt-10 hidden sm:block">
           {slides.map((slide, i) => (
             <div
@@ -156,7 +158,6 @@ export function HeroSlider() {
         </div>
       </div>
 
-      {/* Controls */}
       <div className="absolute bottom-8 left-0 right-0 z-10 px-6">
         <div className="mx-auto flex max-w-6xl items-center justify-between">
           <div className="flex items-center gap-2">
@@ -205,7 +206,6 @@ export function HeroSlider() {
         </div>
       </div>
 
-      {/* Progress bar */}
       <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-white/10">
         <div
           key={active}

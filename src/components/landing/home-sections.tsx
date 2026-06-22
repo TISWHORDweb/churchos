@@ -3,6 +3,7 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { SectionHeader } from "@/components/landing/section-header";
 import { images } from "@/lib/images";
+import { imageLoadingProps } from "@/lib/image-loading";
 import {
   ArrowRight,
   Building2,
@@ -98,6 +99,7 @@ export function HomeWeeklyWorkflow() {
                     fill
                     className="object-cover"
                     sizes="(max-width: 1024px) 100vw, 400px"
+                    {...imageLoadingProps("lazy")}
                   />
                 </div>
               )}
@@ -196,6 +198,7 @@ export function HomeStoryTeaser() {
               fill
               className="object-cover"
               sizes="(max-width: 1024px) 100vw, 400px"
+              {...imageLoadingProps("lazy")}
             />
           </div>
           <div className="flex flex-col justify-center p-8 lg:col-span-7 lg:p-12">

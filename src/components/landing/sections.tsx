@@ -5,6 +5,7 @@ import { SectionHeader } from "@/components/landing/section-header";
 import { AttendanceMiniVisual } from "@/components/landing/attendance-mini-visual";
 import { PricingPickerPreview } from "@/components/landing/pricing-picker-preview";
 import { images } from "@/lib/images";
+import { imageLoadingProps } from "@/lib/image-loading";
 import {
   Building2,
   QrCode,
@@ -122,6 +123,7 @@ export function HomeExploreLinks() {
                 fill
                 className="object-cover transition-transform duration-300 group-hover:scale-[1.02]"
                 sizes="(max-width: 1024px) 100vw, 40vw"
+                {...imageLoadingProps("lazy")}
               />
             </div>
             <div
@@ -166,6 +168,7 @@ export function LandingFeatures() {
               fill
               className="object-cover"
               sizes="100vw"
+              {...imageLoadingProps("lazy")}
             />
             <div className="absolute inset-0 bg-gradient-to-r from-neutral-900/50 to-transparent" />
             <div className="absolute bottom-6 left-6 max-w-md lg:bottom-10 lg:left-10">
@@ -293,6 +296,7 @@ export function LandingTestimonials() {
               fill
               className="object-cover"
               sizes="100vw"
+              {...imageLoadingProps("lazy")}
             />
             <div className="absolute inset-0 bg-gradient-to-t from-neutral-900/60 to-transparent" />
           </div>
@@ -368,7 +372,7 @@ export function LandingFooter() {
             <Link href="/">
               <span className="font-serif text-xl font-semibold tracking-tight">
                 <span className="text-foreground">Church</span>
-                <span className="text-gold-500">OS</span>
+                <span className="text-gold-500 dark:text-gold-400">OS</span>
               </span>
             </Link>
             <p className="mt-4 max-w-sm text-sm leading-relaxed text-muted-foreground">

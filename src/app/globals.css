@@ -6,6 +6,7 @@
   --gold-400: #EF9F27;
   --gold-500: #BA7517;
   --gold-700: #854F0B;
+  --gold-800: #744008;
   --gold-900: #633806;
 
   /* Brand — Teal/Emerald */
@@ -54,8 +55,8 @@
 }
 
 .dark {
-  --background: #633806;
-  --canvas: #854f0b;
+  --background: var(--gold-800);
+  --canvas: var(--gold-800);
   --foreground: #fff9f3;
   --border: rgba(250, 238, 218, 0.15);
   --border-strong: rgba(250, 238, 218, 0.25);
@@ -88,6 +89,7 @@
   --color-gold-400: var(--gold-400);
   --color-gold-500: var(--gold-500);
   --color-gold-700: var(--gold-700);
+  --color-gold-800: var(--gold-800);
   --color-gold-900: var(--gold-900);
 
   --color-teal-50: var(--teal-50);
@@ -202,6 +204,24 @@
 
   .focus-ring {
     @apply outline-none ring-2 ring-gold-400/40 ring-offset-2 ring-offset-white dark:ring-offset-gold-900;
+  }
+
+  .hero-overlay-h {
+    background-image: linear-gradient(
+      to right,
+      color-mix(in srgb, var(--gold-700) 70%, transparent),
+      color-mix(in srgb, var(--gold-700) 50%, transparent),
+      color-mix(in srgb, var(--gold-700) 25%, transparent)
+    );
+  }
+
+  .hero-overlay-v {
+    background-image: linear-gradient(
+      to top,
+      color-mix(in srgb, var(--gold-700) 60%, transparent),
+      color-mix(in srgb, var(--gold-700) 25%, transparent),
+      color-mix(in srgb, var(--gold-700) 30%, transparent)
+    );
   }
 }
 
