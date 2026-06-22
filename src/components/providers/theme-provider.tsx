@@ -11,12 +11,12 @@ interface ThemeProviderProps {
 export function ThemeProvider({
   children,
   forcedTheme,
-  enableSystem = true,
+  enableSystem = false,
 }: ThemeProviderProps) {
   return (
     <NextThemesProvider
       attribute="class"
-      defaultTheme="system"
+      defaultTheme="light"
       forcedTheme={forcedTheme}
       enableSystem={enableSystem}
       disableTransitionOnChange
