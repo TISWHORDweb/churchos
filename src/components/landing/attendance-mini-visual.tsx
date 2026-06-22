@@ -15,10 +15,10 @@ export function AttendanceMiniVisual() {
           ))}
         </div>
         <div className="flex-1">
-          <p className="text-xs font-medium text-neutral-700">
+          <p className="text-xs font-medium text-foreground">
             Sunday First Service
           </p>
-          <p className="text-[11px] text-neutral-400">
+          <p className="text-[11px] text-muted-foreground">
             graceassembly.churchos.app/attend/sunday-lekki
           </p>
         </div>
@@ -33,8 +33,8 @@ export function AttendanceMiniVisual() {
             key={stat.label}
             className="rounded-[6px] bg-white px-2.5 py-2 hairline border-neutral-200"
           >
-            <p className="text-[10px] text-neutral-400">{stat.label}</p>
-            <p className="text-sm font-semibold tabular-nums text-neutral-900">
+            <p className="text-[10px] text-muted-foreground">{stat.label}</p>
+            <p className="text-sm font-semibold tabular-nums text-foreground">
               {stat.value}
             </p>
           </div>

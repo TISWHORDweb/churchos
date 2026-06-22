@@ -35,15 +35,15 @@ export function PricingHowItWorks() {
           {billingSteps.map((item) => (
             <div
               key={item.step}
-              className="rounded-[8px] bg-white p-6 hairline border-neutral-200/80"
+              className="surface p-6 hairline border-neutral-200/80"
             >
-              <p className="text-xs font-medium tabular-nums text-gold-700">
+              <p className="text-xs font-medium tabular-nums text-gold-700 dark:text-gold-400">
                 {item.step}
               </p>
-              <h3 className="mt-2 text-base font-semibold text-neutral-900">
+              <h3 className="mt-2 text-base font-semibold text-foreground">
                 {item.title}
               </h3>
-              <p className="mt-2 text-sm leading-relaxed text-neutral-500">
+              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
                 {item.body}
               </p>
             </div>
@@ -103,26 +103,26 @@ export function PricingBundles() {
           {bundles.map((bundle) => (
             <div
               key={bundle.name}
-              className="flex flex-col rounded-[8px] bg-white p-6 hairline border-neutral-200/80"
+              className="flex flex-col surface p-6 hairline border-neutral-200/80"
             >
-              <p className="text-xs font-medium uppercase tracking-widest text-gold-700">
+              <p className="text-xs font-medium uppercase tracking-widest text-gold-700 dark:text-gold-400">
                 {bundle.name}
               </p>
-              <p className="mt-2 text-sm leading-relaxed text-neutral-500">
+              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
                 {bundle.description}
               </p>
               <ul className="mt-4 flex-1 space-y-2">
                 {bundle.includes.map((item) => (
                   <li
                     key={item}
-                    className="flex items-start gap-2 text-sm text-neutral-700"
+                    className="flex items-start gap-2 text-sm text-foreground"
                   >
                     <Check className="mt-0.5 h-3.5 w-3.5 shrink-0 text-teal-400" />
                     {item}
                   </li>
                 ))}
               </ul>
-              <p className="mt-4 text-xs text-neutral-400">
+              <p className="mt-4 text-xs text-muted-foreground">
                 Typical for: {bundle.typical}
               </p>
             </div>
@@ -148,13 +148,13 @@ export function PricingIncluded() {
       <div className="mx-auto max-w-6xl">
         <div className="grid gap-8 lg:grid-cols-2 lg:items-start">
           <div>
-            <p className="text-xs font-medium uppercase tracking-widest text-gold-700">
+            <p className="text-xs font-medium uppercase tracking-widest text-gold-700 dark:text-gold-400">
               Always included
             </p>
-            <h2 className="mt-3 text-2xl font-semibold tracking-tight text-neutral-900">
+            <h2 className="mt-3 text-2xl font-semibold tracking-tight text-foreground">
               Every plan includes the platform essentials
             </h2>
-            <p className="mt-3 text-sm leading-relaxed text-neutral-500">
+            <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
               Regardless of which modules you pick, these capabilities ship with
               every ChurchOS tenant — no add-on fees for basic security or
               branding.
@@ -164,10 +164,10 @@ export function PricingIncluded() {
             {included.map((item) => (
               <li
                 key={item}
-                className="flex items-start gap-3 rounded-[8px] bg-white p-4 hairline border-neutral-200/80"
+                className="flex items-start gap-3 surface p-4 hairline border-neutral-200/80"
               >
                 <Check className="mt-0.5 h-4 w-4 shrink-0 text-teal-400" />
-                <span className="text-sm text-neutral-700">{item}</span>
+                <span className="text-sm text-foreground">{item}</span>
               </li>
             ))}
           </ul>
@@ -210,10 +210,10 @@ export function PricingFAQ() {
           {pricingFaqs.map((item) => (
             <div
               key={item.q}
-              className="rounded-[8px] bg-white p-6 hairline border-neutral-200/80"
+              className="surface p-6 hairline border-neutral-200/80"
             >
-              <h3 className="text-sm font-semibold text-neutral-900">{item.q}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-neutral-500">
+              <h3 className="text-sm font-semibold text-foreground">{item.q}</h3>
+              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
                 {item.a}
               </p>
             </div>
@@ -227,13 +227,13 @@ export function PricingFAQ() {
 export function PricingCTA() {
   return (
     <section className="px-6 pb-20 lg:pb-28">
-      <div className="mx-auto max-w-6xl rounded-[12px] bg-white p-8 hairline border-neutral-200/80 lg:p-12">
+      <div className="mx-auto max-w-6xl surface-lg p-8 hairline border-neutral-200/80 lg:p-12">
         <div className="lg:flex lg:items-center lg:justify-between">
           <div>
-            <h2 className="text-xl font-semibold text-neutral-900">
+            <h2 className="text-xl font-semibold text-foreground">
               Start free — pick modules when you&apos;re ready
             </h2>
-            <p className="mt-2 text-sm text-neutral-500">
+            <p className="mt-2 text-sm text-muted-foreground">
               Register with your organizational email and explore before you pay.
             </p>
           </div>

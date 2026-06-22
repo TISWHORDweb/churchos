@@ -29,20 +29,20 @@ export function HeroVisual() {
               {/* Metric row */}
               <div className="grid grid-cols-3 gap-2">
                 <div className="rounded-[6px] border-l-[3px] border-l-gold-400 bg-white p-2.5 hairline border-neutral-200">
-                  <p className="text-[9px] text-neutral-400">Attendance</p>
-                  <p className="mt-0.5 text-sm font-semibold tabular-nums text-neutral-900">
+                  <p className="text-[9px] text-muted-foreground">Attendance</p>
+                  <p className="mt-0.5 text-sm font-semibold tabular-nums text-foreground">
                     1,847
                   </p>
                 </div>
                 <div className="rounded-[6px] border-l-[3px] border-l-teal-400 bg-white p-2.5 hairline border-neutral-200">
-                  <p className="text-[9px] text-neutral-400">First timers</p>
-                  <p className="mt-0.5 text-sm font-semibold tabular-nums text-neutral-900">
+                  <p className="text-[9px] text-muted-foreground">First timers</p>
+                  <p className="mt-0.5 text-sm font-semibold tabular-nums text-foreground">
                     34
                   </p>
                 </div>
                 <div className="rounded-[6px] border-l-[3px] border-l-neutral-300 bg-white p-2.5 hairline border-neutral-200">
-                  <p className="text-[9px] text-neutral-400">Branches</p>
-                  <p className="mt-0.5 text-sm font-semibold tabular-nums text-neutral-900">
+                  <p className="text-[9px] text-muted-foreground">Branches</p>
+                  <p className="mt-0.5 text-sm font-semibold tabular-nums text-foreground">
                     12
                   </p>
                 </div>
@@ -50,7 +50,7 @@ export function HeroVisual() {
 
               {/* Chart mock */}
               <div className="rounded-[6px] bg-white p-3 hairline border-neutral-200">
-                <p className="text-[10px] font-medium text-neutral-700">
+                <p className="text-[10px] font-medium text-foreground">
                   Sunday attendance — last 6 weeks
                 </p>
                 <div className="mt-3 flex items-end gap-1.5 h-16">
@@ -78,10 +78,10 @@ export function HeroVisual() {
                     key={row.branch}
                     className="flex items-center justify-between px-2 py-1.5 hairline-b border-neutral-100 last:border-0"
                   >
-                    <span className="text-[10px] text-neutral-600">
+                    <span className="text-[10px] text-muted-foreground">
                       {row.branch}
                     </span>
-                    <span className="text-[10px] font-medium tabular-nums text-neutral-900">
+                    <span className="text-[10px] font-medium tabular-nums text-foreground">
                       {row.count}
                     </span>
                   </div>
@@ -94,16 +94,16 @@ export function HeroVisual() {
 
       {/* Floating check-in card */}
       <div className="absolute -bottom-4 -left-4 w-[168px] rotate-[-3deg] rounded-[8px] bg-white p-3 hairline border-neutral-200 sm:-left-8">
-        <p className="text-[10px] font-medium text-teal-700">Live check-ins</p>
-        <p className="mt-1 text-xl font-semibold tabular-nums text-neutral-900">
+        <p className="text-[10px] font-medium text-teal-700 dark:text-teal-400">Live check-ins</p>
+        <p className="mt-1 text-xl font-semibold tabular-nums text-foreground">
           247
         </p>
-        <p className="mt-0.5 text-[9px] text-neutral-400">
+        <p className="mt-0.5 text-[9px] text-muted-foreground">
           First Service · Lekki branch
         </p>
         <div className="mt-2 flex items-center gap-1">
           <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-teal-400" />
-          <span className="text-[9px] text-neutral-500">Updating live</span>
+          <span className="text-[9px] text-muted-foreground">Updating live</span>
         </div>
       </div>
 
@@ -121,7 +121,7 @@ export function HeroVisual() {
             />
           ))}
         </div>
-        <p className="mt-1.5 text-center text-[8px] font-medium text-gold-700">
+        <p className="mt-1.5 text-center text-[8px] font-medium text-gold-700 dark:text-gold-400">
           Scan to check in
         </p>
       </div>

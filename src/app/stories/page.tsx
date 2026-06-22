@@ -1,6 +1,7 @@
 import { MarketingPageShell } from "@/components/layout/marketing-page-shell";
-import { PageHero } from "@/components/landing/page-hero";
+import { PageHeroBanner } from "@/components/landing/page-hero-banner";
 import { LandingTestimonials } from "@/components/landing/sections";
+import { images } from "@/lib/images";
 import {
   StoriesImpactStats,
   StoriesCaseStudies,
@@ -18,11 +19,11 @@ export const metadata = {
 
 export default function StoriesPage() {
   return (
-    <MarketingPageShell>
-      <PageHero
-        kicker="Stories"
-        title="Real churches, real numbers, real admin teams"
-        description="These aren't marketing hypotheticals. They're reported outcomes from ministries that replaced registers, WhatsApp chains, and Monday spreadsheet merges with ChurchOS."
+    <MarketingPageShell heroOverlay>
+      <PageHeroBanner
+        title="Stories"
+        description="Real churches, real numbers — how admin teams replaced registers and spreadsheet merges with ChurchOS."
+        image={images.storiesHero}
       />
       <LandingTestimonials />
       <StoriesImpactStats />

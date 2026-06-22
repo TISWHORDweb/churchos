@@ -43,10 +43,34 @@
   --muted-foreground: var(--neutral-600);
   --ring: var(--gold-400);
 
+  --card: #ffffff;
+  --card-foreground: var(--neutral-900);
+  --card-muted: var(--neutral-600);
+
   /* Layout */
   --sidebar-width: 240px;
   --sidebar-collapsed: 64px;
   --topbar-height: 56px;
+}
+
+.dark {
+  --background: #633806;
+  --canvas: #854f0b;
+  --foreground: #fff9f3;
+  --border: rgba(250, 238, 218, 0.15);
+  --border-strong: rgba(250, 238, 218, 0.25);
+  --muted: #e8c99a;
+  --muted-foreground: #faeeda;
+
+  --gold-50: #a67c2a;
+  --teal-50: #1a4a3a;
+  --success-50: #1a4a35;
+  --warning-50: #6b4510;
+  --danger-50: #5c2020;
+
+  --card: #ffffff;
+  --card-foreground: var(--neutral-900);
+  --card-muted: var(--neutral-600);
 }
 
 @theme inline {
@@ -56,6 +80,9 @@
   --color-border: var(--border);
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-card-muted: var(--card-muted);
 
   --color-gold-50: var(--gold-50);
   --color-gold-400: var(--gold-400);
@@ -92,6 +119,8 @@
   --radius-sm: 6px;
   --radius-md: 8px;
   --radius-lg: 12px;
+
+  --animate-hero-progress: hero-progress 7s linear forwards;
 }
 
 @layer base {
@@ -119,6 +148,41 @@
   }
 }
 
+@layer components {
+  .surface {
+    @apply rounded-[8px] border border-neutral-200/80 bg-card;
+    border-width: 0.5px;
+    color: var(--card-foreground);
+  }
+
+  .surface-lg {
+    @apply rounded-[12px] border border-neutral-200/80 bg-card;
+    border-width: 0.5px;
+    color: var(--card-foreground);
+  }
+
+  /* White cards keep dark text in dark mode */
+  .dark .surface,
+  .dark .surface-lg,
+  .dark .bg-card {
+    --foreground: var(--neutral-900);
+    --muted-foreground: var(--neutral-600);
+    --muted: var(--neutral-500);
+    --color-foreground: var(--neutral-900);
+    --color-muted-foreground: var(--neutral-600);
+    color: var(--card-foreground);
+  }
+
+  .dark .surface .bg-white,
+  .dark .surface-lg .bg-white {
+    --foreground: var(--neutral-900);
+    --muted-foreground: var(--neutral-600);
+    --color-foreground: var(--neutral-900);
+    --color-muted-foreground: var(--neutral-600);
+    color: var(--neutral-900);
+  }
+}
+
 @layer utilities {
   .hairline {
     border-width: 0.5px;
@@ -137,6 +201,15 @@
   }
 
   .focus-ring {
-    @apply outline-none ring-2 ring-gold-400/40 ring-offset-2 ring-offset-white;
+    @apply outline-none ring-2 ring-gold-400/40 ring-offset-2 ring-offset-white dark:ring-offset-gold-900;
+  }
+}
+
+@keyframes hero-progress {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
   }
 }

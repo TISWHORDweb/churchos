@@ -19,13 +19,13 @@ export function LandingHero() {
     <section className="px-6 pb-16 pt-6 lg:pb-24 lg:pt-10">
       <div className="mx-auto grid max-w-6xl items-center gap-10 lg:grid-cols-2 lg:gap-14">
         <div className="max-w-xl">
-          <p className="text-xs font-medium uppercase tracking-widest text-gold-700">
+          <p className="text-xs font-medium uppercase tracking-widest text-gold-700 dark:text-gold-400">
             Church management SaaS
           </p>
-          <h1 className="mt-3 font-display text-[36px] font-semibold leading-[1.08] tracking-tight text-neutral-900 sm:text-[44px] lg:text-[48px]">
+          <h1 className="mt-3 font-display text-[36px] font-semibold leading-[1.08] tracking-tight text-foreground sm:text-[44px] lg:text-[48px]">
             Run every branch, service and Sunday from one place
           </h1>
-          <p className="mt-5 text-base leading-relaxed text-neutral-500 sm:text-lg">
+          <p className="mt-5 text-base leading-relaxed text-muted-foreground sm:text-lg">
             ChurchOS connects your branches, recurring services, and QR
             check-ins into a single dashboard — so your admin team stops
             reconciling spreadsheets every Monday morning.
@@ -38,7 +38,7 @@ export function LandingHero() {
               <Link href="/pricing">See pricing</Link>
             </Button>
           </div>
-          <p className="mt-6 text-sm text-neutral-400">
+          <p className="mt-6 text-sm text-muted-foreground">
             Organizational email required · Annual billing · No credit card to
             explore
           </p>
@@ -56,20 +56,20 @@ export function LandingHero() {
             />
           </div>
           {/* Floating stat card */}
-          <div className="absolute -bottom-5 -left-4 w-[200px] rotate-[-2deg] rounded-[8px] bg-white p-4 hairline border-neutral-200 sm:-left-8">
-            <p className="text-[10px] font-medium uppercase tracking-wide text-teal-700">
+          <div className="absolute -bottom-5 -left-4 w-[200px] rotate-[-2deg] surface p-4 hairline border-neutral-200 sm:-left-8">
+            <p className="text-[10px] font-medium uppercase tracking-wide text-teal-700 dark:text-teal-400">
               Live check-ins
             </p>
-            <p className="mt-1 text-2xl font-semibold tabular-nums text-neutral-900">
+            <p className="mt-1 text-2xl font-semibold tabular-nums text-foreground">
               247
             </p>
-            <p className="text-[11px] text-neutral-400">
+            <p className="text-[11px] text-muted-foreground">
               First Service · today
             </p>
           </div>
           {/* Floating module chip */}
           <div className="absolute -right-3 top-6 rotate-[2deg] rounded-[8px] bg-gold-50 px-3 py-2 hairline border-gold-400/20 sm:-right-6">
-            <p className="text-xs font-medium text-gold-700">
+            <p className="text-xs font-medium text-gold-700 dark:text-gold-400">
               QR attendance active
             </p>
           </div>
@@ -111,7 +111,7 @@ export function HomeExploreLinks() {
           <Link
             key={item.href}
             href={item.href}
-            className="group grid overflow-hidden rounded-[12px] bg-white hairline border-neutral-200/80 transition-colors duration-150 hover:border-gold-400/40 lg:grid-cols-12"
+          className="group grid overflow-hidden surface-lg transition-colors duration-150 hover:border-gold-400/40 lg:grid-cols-12"
           >
             <div
               className={`relative aspect-[16/9] lg:aspect-auto lg:col-span-5 ${i % 2 === 1 ? "lg:order-2" : ""}`}
@@ -127,16 +127,16 @@ export function HomeExploreLinks() {
             <div
               className={`flex flex-col justify-center p-6 lg:col-span-7 lg:p-10 ${i % 2 === 1 ? "lg:order-1" : ""}`}
             >
-              <p className="text-xs font-medium uppercase tracking-widest text-gold-700">
+              <p className="text-xs font-medium uppercase tracking-widest text-gold-700 dark:text-gold-400">
                 {item.label}
               </p>
-              <h2 className="mt-2 text-xl font-semibold text-neutral-900 lg:text-2xl">
+              <h2 className="mt-2 text-xl font-semibold text-foreground lg:text-2xl">
                 {item.title}
               </h2>
-              <p className="mt-2 text-sm leading-relaxed text-neutral-500 lg:text-base">
+              <p className="mt-2 text-sm leading-relaxed text-muted-foreground lg:text-base">
                 {item.description}
               </p>
-              <span className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-gold-600 transition-colors group-hover:text-gold-700">
+              <span className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-gold-600 dark:text-gold-400 transition-colors group-hover:text-gold-700 dark:text-gold-400">
                 Explore {item.label.toLowerCase()}
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
               </span>
@@ -177,12 +177,12 @@ export function LandingFeatures() {
         </div>
 
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-12">
-          <div className="sm:col-span-2 lg:col-span-7 lg:row-span-2 rounded-[8px] bg-white p-6 hairline border-neutral-200/80">
-            <p className="text-xs font-medium text-teal-700">Most-used module</p>
-            <h3 className="mt-1 text-lg font-semibold text-neutral-900">
+          <div className="sm:col-span-2 lg:col-span-7 lg:row-span-2 surface p-6 hairline border-neutral-200/80">
+            <p className="text-xs font-medium text-teal-700 dark:text-teal-400">Most-used module</p>
+            <h3 className="mt-1 text-lg font-semibold text-foreground">
               QR attendance that links to the right service automatically
             </h3>
-            <p className="mt-2 max-w-md text-sm leading-relaxed text-neutral-500">
+            <p className="mt-2 max-w-md text-sm leading-relaxed text-muted-foreground">
               Generate a campaign, share the link or QR, and visitors check in
               without an account. ChurchOS detects which service is live based
               on day and time.
@@ -190,55 +190,55 @@ export function LandingFeatures() {
             <AttendanceMiniVisual />
           </div>
 
-          <div className="lg:col-span-5 rounded-[8px] bg-white p-5 hairline border-neutral-200/80">
+          <div className="lg:col-span-5 surface p-5 hairline border-neutral-200/80">
             <Building2 className="h-4 w-4 text-gold-500" />
-            <h3 className="mt-3 text-sm font-semibold text-neutral-900">
+            <h3 className="mt-3 text-sm font-semibold text-foreground">
               Branch management
             </h3>
-            <p className="mt-1.5 text-sm leading-relaxed text-neutral-500">
+            <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">
               Assign a manager per location with login scoped to one branch.
             </p>
           </div>
 
           <div className="lg:col-span-5 rounded-[8px] bg-teal-50 p-5 hairline border-teal-400/10">
             <QrCode className="h-4 w-4 text-teal-400" />
-            <h3 className="mt-3 text-sm font-semibold text-neutral-900">
+            <h3 className="mt-3 text-sm font-semibold text-foreground">
               No app download for visitors
             </h3>
-            <p className="mt-4 text-2xl font-semibold tabular-nums text-teal-700">
+            <p className="mt-4 text-2xl font-semibold tabular-nums text-teal-700 dark:text-teal-400">
               12s
             </p>
             <p className="text-xs text-teal-700/80">Average check-in time</p>
           </div>
 
-          <div className="sm:col-span-2 lg:col-span-4 rounded-[8px] bg-white p-5 hairline border-neutral-200/80">
-            <BarChart3 className="h-4 w-4 text-neutral-500" />
-            <h3 className="mt-3 text-sm font-semibold text-neutral-900">
+          <div className="sm:col-span-2 lg:col-span-4 surface p-5 hairline border-neutral-200/80">
+            <BarChart3 className="h-4 w-4 text-muted-foreground" />
+            <h3 className="mt-3 text-sm font-semibold text-foreground">
               Branded PDF reports
             </h3>
-            <p className="mt-1.5 text-sm text-neutral-500">
+            <p className="mt-1.5 text-sm text-muted-foreground">
               Your logo and colors on every export.
             </p>
           </div>
 
-          <div className="lg:col-span-4 rounded-[8px] bg-white p-5 hairline border-neutral-200/80">
+          <div className="lg:col-span-4 surface p-5 hairline border-neutral-200/80">
             <Users className="h-4 w-4 text-gold-500" />
-            <h3 className="mt-3 text-sm font-semibold text-neutral-900">
+            <h3 className="mt-3 text-sm font-semibold text-foreground">
               Pastor invitations
             </h3>
-            <p className="mt-1.5 text-sm text-neutral-500">
+            <p className="mt-1.5 text-sm text-muted-foreground">
               Send a link — they pick their branch and get access.
             </p>
           </div>
 
-          <div className="lg:col-span-4 rounded-[8px] bg-white p-5 hairline border-neutral-200/80">
-            <h3 className="text-sm font-semibold text-neutral-900">
+          <div className="lg:col-span-4 surface p-5 hairline border-neutral-200/80">
+            <h3 className="text-sm font-semibold text-foreground">
               SMS & email to the right people
             </h3>
-            <p className="mt-2 text-sm leading-relaxed text-neutral-500">
+            <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
               Filter by branch, first-timers, or program attendees.
             </p>
-            <p className="mt-3 text-xs font-medium text-gold-700">
+            <p className="mt-3 text-xs font-medium text-gold-700 dark:text-gold-400">
               <Megaphone className="mr-1 inline h-3 w-3" />
               Announcement module
             </p>
@@ -267,7 +267,7 @@ export function LandingPricing({ modules }: { modules: PricingModule[] }) {
           heading="Pick modules, see your total — same as onboarding"
           supporting="No tier guessing. Select exactly what your church needs and pay annually. Try the module picker below — it's the same one you'll use after registration."
         />
-        <div className="rounded-[12px] bg-white p-6 hairline border-neutral-200/80 lg:p-8">
+        <div className="surface-lg p-6 hairline border-neutral-200/80 lg:p-8">
           <PricingPickerPreview modules={modules} />
         </div>
       </div>
@@ -299,25 +299,25 @@ export function LandingTestimonials() {
         </div>
 
         <div className="grid gap-4 lg:grid-cols-12">
-          <div className="lg:col-span-7 rounded-[8px] bg-white p-8 hairline border-neutral-200/80 lg:p-10">
-            <p className="text-lg leading-relaxed text-neutral-700">
+          <div className="lg:col-span-7 surface p-8 hairline border-neutral-200/80 lg:p-10">
+            <p className="text-lg leading-relaxed text-foreground">
               &ldquo;We went from three separate WhatsApp groups and a Google
               Sheet per branch to one dashboard. Last quarter we tracked{" "}
-              <span className="font-medium text-neutral-900">14,200 check-ins</span>{" "}
+              <span className="font-medium text-foreground">14,200 check-ins</span>{" "}
               across{" "}
-              <span className="font-medium text-neutral-900">12 branches</span>.
+              <span className="font-medium text-foreground">12 branches</span>.
               The QR codes alone cut our Sunday registration time from 45
               minutes to under 10.&rdquo;
             </p>
             <div className="mt-8 flex items-center gap-4">
-              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gold-50 text-sm font-medium text-gold-700">
+              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gold-50 text-sm font-medium text-gold-700 dark:text-gold-400">
                 DO
               </div>
               <div>
-                <p className="text-sm font-medium text-neutral-900">
+                <p className="text-sm font-medium text-foreground">
                   Pastor David Okonkwo
                 </p>
-                <p className="text-xs text-neutral-500">
+                <p className="text-xs text-muted-foreground">
                   Senior Pastor · Grace Assembly · Lagos & Abuja
                 </p>
               </div>
@@ -325,30 +325,30 @@ export function LandingTestimonials() {
           </div>
 
           <div className="flex flex-col gap-4 lg:col-span-5">
-            <div className="flex-1 rounded-[8px] bg-white p-6 hairline border-neutral-200/80">
-              <p className="text-sm leading-relaxed text-neutral-600">
+            <div className="flex-1 surface p-6 hairline border-neutral-200/80">
+              <p className="text-sm leading-relaxed text-muted-foreground">
                 &ldquo;Setup took us an afternoon. We picked 4 modules, skipped
                 payment to explore, and had our first QR campaign live by
                 Wednesday midweek.&rdquo;
               </p>
-              <p className="mt-4 text-sm font-medium text-neutral-900">
+              <p className="mt-4 text-sm font-medium text-foreground">
                 Rev. Sarah Mensah
               </p>
-              <p className="text-xs text-neutral-500">
+              <p className="text-xs text-muted-foreground">
                 Admin · Lighthouse Chapel, Accra
               </p>
             </div>
 
-            <div className="flex-1 rounded-[8px] bg-white p-6 hairline border-neutral-200/80">
-              <p className="text-sm leading-relaxed text-neutral-600">
+            <div className="flex-1 surface p-6 hairline border-neutral-200/80">
+              <p className="text-sm leading-relaxed text-muted-foreground">
                 &ldquo;The PDF reports carry our logo and colors. Leadership
                 stopped asking &lsquo;can someone clean this up?&rsquo; before
                 every meeting.&rdquo;
               </p>
-              <p className="mt-4 text-sm font-medium text-neutral-900">
+              <p className="mt-4 text-sm font-medium text-foreground">
                 Elder James Adeyemi
               </p>
-              <p className="text-xs text-neutral-500">
+              <p className="text-xs text-muted-foreground">
                 Operations · Covenant Church, Ibadan
               </p>
             </div>
@@ -361,17 +361,17 @@ export function LandingTestimonials() {
 
 export function LandingFooter() {
   return (
-    <footer id="contact" className="hairline-t border-neutral-200/80 px-6 py-16">
+    <footer id="contact" className="hairline-t border-neutral-200/80 px-6 py-16 dark:border-gold-400/20">
       <div className="mx-auto max-w-6xl">
         <div className="grid gap-12 lg:grid-cols-12">
           <div className="lg:col-span-5">
             <Link href="/">
               <span className="font-serif text-xl font-semibold tracking-tight">
-                <span className="text-neutral-900">Church</span>
+                <span className="text-foreground">Church</span>
                 <span className="text-gold-500">OS</span>
               </span>
             </Link>
-            <p className="mt-4 max-w-sm text-sm leading-relaxed text-neutral-500">
+            <p className="mt-4 max-w-sm text-sm leading-relaxed text-muted-foreground">
               Church management for multi-branch ministries. Attendance, branches,
               pastors, and reports — modular, annual, and built for teams who run
               services every week.
@@ -383,7 +383,7 @@ export function LandingFooter() {
 
           <div className="grid gap-8 sm:grid-cols-2 lg:col-span-4 lg:col-start-8">
             <div>
-              <h4 className="text-sm font-semibold text-neutral-900">Product</h4>
+              <h4 className="text-sm font-semibold text-foreground">Product</h4>
               <ul className="mt-4 space-y-2">
                 {[
                   { label: "Features", href: "/features" },
@@ -393,7 +393,7 @@ export function LandingFooter() {
                   <li key={item.label}>
                     <Link
                       href={item.href}
-                      className="text-sm text-neutral-500 transition-colors hover:text-neutral-900"
+                      className="text-sm text-muted-foreground transition-colors hover:text-foreground"
                     >
                       {item.label}
                     </Link>
@@ -402,12 +402,12 @@ export function LandingFooter() {
               </ul>
             </div>
             <div>
-              <h4 className="text-sm font-semibold text-neutral-900">Contact</h4>
+              <h4 className="text-sm font-semibold text-foreground">Contact</h4>
               <ul className="mt-4 space-y-2">
                 <li>
                   <a
                     href="mailto:hello@churchos.app"
-                    className="text-sm text-neutral-500 transition-colors hover:text-neutral-900"
+                    className="text-sm text-muted-foreground transition-colors hover:text-foreground"
                   >
                     hello@churchos.app
                   </a>
@@ -415,7 +415,7 @@ export function LandingFooter() {
                 <li>
                   <Link
                     href="/register"
-                    className="text-sm text-neutral-500 transition-colors hover:text-neutral-900"
+                    className="text-sm text-muted-foreground transition-colors hover:text-foreground"
                   >
                     Book a demo
                   </Link>
@@ -425,8 +425,8 @@ export function LandingFooter() {
           </div>
         </div>
 
-        <div className="mt-12 hairline-t border-neutral-200/80 pt-8">
-          <p className="text-xs text-neutral-400">
+        <div className="mt-12 hairline-t border-neutral-200/80 pt-8 dark:border-gold-400/20">
+          <p className="text-xs text-muted-foreground">
             © {new Date().getFullYear()} ChurchOS. All rights reserved.
           </p>
         </div>

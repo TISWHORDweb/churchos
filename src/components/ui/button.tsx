@@ -11,10 +11,13 @@ const buttonVariants = cva(
         default:
           "bg-gold-400 text-gold-900 hover:bg-gold-400/90 active:scale-[0.98]",
         outline:
-          "hairline border-neutral-200 bg-white text-neutral-700 hover:bg-neutral-50 active:scale-[0.98]",
-        ghost: "text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900",
+          "hairline border-neutral-200 bg-white text-neutral-700 hover:bg-neutral-50 active:scale-[0.98] dark:border-gold-400/25 dark:bg-gold-900/30 dark:text-gold-50 dark:hover:bg-gold-900/50",
+        ghost:
+          "text-inherit hover:bg-black/5 dark:hover:bg-white/10",
         destructive:
           "bg-danger-50 text-danger-700 hover:bg-danger-50/80 hairline border-transparent",
+        soft:
+          "bg-gold-50 text-gold-700 hover:bg-gold-100 active:scale-[0.98] hairline border-gold-400/20 dark:bg-gold-50 dark:text-gold-900 dark:hover:bg-gold-50/90",
         link: "text-gold-500 underline-offset-4 hover:underline p-0 h-auto",
       },
       size: {

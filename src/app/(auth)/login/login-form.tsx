@@ -57,23 +57,30 @@ export default function LoginForm() {
       quote="One dashboard for every branch, every service, every Sunday."
       attribution="Grace Assembly · 12 branches on ChurchOS"
     >
-      <Link href="/">
+      <Link href="/" className="mb-8 hidden lg:inline-block">
         <Wordmark className="text-2xl" />
       </Link>
-      <h1 className="mt-8 text-2xl font-semibold tracking-tight text-neutral-900">
-        Welcome back
-      </h1>
-      <p className="mt-2 text-sm text-neutral-500">
-        Sign in to your church dashboard
-      </p>
 
-      <form onSubmit={handleSubmit(onSubmit)} className="mt-8 space-y-4">
+      <div className="border-l-[3px] border-gold-400 pl-5">
+        <p className="text-xs font-semibold uppercase tracking-widest text-gold-600">
+          Sign in
+        </p>
+        <h1 className="mt-2 text-[28px] font-semibold tracking-tight text-neutral-900">
+          Welcome back
+        </h1>
+        <p className="mt-1 text-sm text-neutral-500">
+          Access your church dashboard
+        </p>
+      </div>
+
+      <form onSubmit={handleSubmit(onSubmit)} className="mt-8 space-y-5">
         <div className="space-y-2">
           <Label htmlFor="email">Email</Label>
           <Input
             id="email"
             type="email"
             placeholder="admin@yourchurch.org"
+            autoComplete="email"
             error={errors.email?.message}
             {...register("email")}
           />
@@ -85,12 +92,13 @@ export default function LoginForm() {
             id="password"
             type="password"
             placeholder="••••••••"
+            autoComplete="current-password"
             error={errors.password?.message}
             {...register("password")}
           />
         </div>
 
-        <Button type="submit" className="w-full" disabled={loading}>
+        <Button type="submit" className="mt-2 h-11 w-full text-[15px]" disabled={loading}>
           {loading ? "Signing in..." : "Sign in"}
         </Button>
       </form>
@@ -99,7 +107,7 @@ export default function LoginForm() {
         Don&apos;t have an account?{" "}
         <Link
           href="/register"
-          className="font-medium text-gold-600 hover:text-gold-700"
+          className="font-semibold text-gold-600 hover:text-gold-700"
         >
           Register your church
         </Link>

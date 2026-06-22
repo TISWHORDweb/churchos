@@ -105,7 +105,7 @@ export function PricingPickerPreview({ modules }: PricingPickerPreviewProps) {
 
           return (
             <div key={bundle}>
-              <p className="mb-3 text-xs font-medium uppercase tracking-widest text-neutral-400">
+              <p className="mb-3 text-xs font-medium uppercase tracking-widest text-muted-foreground">
                 {bundle}
               </p>
               <div className="space-y-2">
@@ -121,8 +121,8 @@ export function PricingPickerPreview({ modules }: PricingPickerPreviewProps) {
                       className={cn(
                         "flex w-full items-start gap-3 rounded-[8px] p-4 text-left transition-all duration-150 ease-out hairline",
                         isSelected
-                          ? "border-gold-400 bg-white"
-                          : "border-neutral-200 bg-white hover:border-neutral-300"
+                          ? "border-gold-400 bg-card"
+                          : "border-neutral-200 bg-card hover:border-neutral-300"
                       )}
                     >
                       <div
@@ -146,15 +146,15 @@ export function PricingPickerPreview({ modules }: PricingPickerPreviewProps) {
                       <div className="min-w-0 flex-1">
                         <div className="flex items-center gap-2">
                           <Icon className="h-3.5 w-3.5 shrink-0 text-gold-500" />
-                          <span className="text-sm font-medium text-neutral-900">
+                          <span className="text-sm font-medium text-foreground">
                             {mod.name}
                           </span>
                         </div>
-                        <p className="mt-0.5 text-xs text-neutral-500 line-clamp-1">
+                        <p className="mt-0.5 text-xs text-muted-foreground line-clamp-1">
                           {mod.description}
                         </p>
                       </div>
-                      <span className="shrink-0 text-sm font-medium tabular-nums text-neutral-700">
+                      <span className="shrink-0 text-sm font-medium tabular-nums text-foreground">
                         {formatCurrency(mod.annualPrice)}
                       </span>
                     </button>
@@ -166,21 +166,21 @@ export function PricingPickerPreview({ modules }: PricingPickerPreviewProps) {
         })}
 
         {remaining > 0 && (
-          <p className="text-sm text-neutral-400">
+          <p className="text-sm text-muted-foreground">
             + {remaining} more modules available after registration
           </p>
         )}
       </div>
 
       <div className="lg:sticky lg:top-24 lg:self-start">
-        <div className="rounded-[8px] bg-white p-6 hairline border-neutral-200">
-          <p className="text-xs font-medium uppercase tracking-widest text-neutral-400">
+        <div className="surface p-6 hairline border-neutral-200">
+          <p className="text-xs font-medium uppercase tracking-widest text-muted-foreground">
             Your annual total
           </p>
-          <p className="mt-2 text-3xl font-semibold tabular-nums text-neutral-900">
+          <p className="mt-2 text-3xl font-semibold tabular-nums text-foreground">
             {formatCurrency(total)}
           </p>
-          <p className="mt-1 text-xs text-neutral-500">
+          <p className="mt-1 text-xs text-muted-foreground">
             {selected.length} module{selected.length !== 1 ? "s" : ""} selected ·
             billed yearly
           </p>
@@ -191,7 +191,7 @@ export function PricingPickerPreview({ modules }: PricingPickerPreviewProps) {
               .map((m) => (
                 <div
                   key={m.id}
-                  className="flex justify-between text-xs text-neutral-500"
+                  className="flex justify-between text-xs text-muted-foreground"
                 >
                   <span>{m.name}</span>
                   <span className="tabular-nums">
@@ -204,7 +204,7 @@ export function PricingPickerPreview({ modules }: PricingPickerPreviewProps) {
           <Button className="mt-6 w-full" asChild>
             <Link href="/register">Start with these modules</Link>
           </Button>
-          <p className="mt-3 text-center text-[11px] text-neutral-400">
+          <p className="mt-3 text-center text-[11px] text-muted-foreground">
             Same picker you&apos;ll see after registration
           </p>
         </div>

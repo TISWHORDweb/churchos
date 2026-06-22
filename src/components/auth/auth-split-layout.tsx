@@ -1,5 +1,7 @@
 import Image from "next/image";
-import { cn } from "@/lib/utils";
+import Link from "next/link";
+import { ArrowLeft } from "lucide-react";
+import { Wordmark } from "@/components/brand/wordmark";
 
 interface AuthSplitLayoutProps {
   imageSrc: string;
@@ -17,39 +19,66 @@ export function AuthSplitLayout({
   children,
 }: AuthSplitLayoutProps) {
   return (
-    <div className="flex min-h-screen flex-col lg:flex-row">
+    <div className="flex min-h-screen flex-col font-[family-name:var(--font-auth)] lg:flex-row">
       {/* Image panel */}
-      <div className="relative h-[36vh] min-h-[240px] lg:h-auto lg:min-h-screen lg:w-1/2">
+      <div className="relative hidden min-h-screen lg:block lg:w-1/2">
         <Image
           src={imageSrc}
           alt={imageAlt}
           fill
           priority
           className="object-cover"
-          sizes="(max-width: 1024px) 100vw, 50vw"
+          sizes="50vw"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-neutral-900/70 via-neutral-900/20 to-neutral-900/10 lg:bg-gradient-to-r lg:from-neutral-900/60 lg:via-neutral-900/25 lg:to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-br from-neutral-900/70 via-neutral-900/35 to-neutral-900/20" />
         {quote && (
-          <div className="absolute bottom-6 left-6 right-6 lg:bottom-12 lg:left-12 lg:max-w-md">
-            <p className="text-base leading-relaxed text-white/95 lg:text-lg">
+          <div className="absolute bottom-16 left-12 right-12 max-w-md">
+            <p className="text-xl font-medium leading-relaxed text-white/95">
               &ldquo;{quote}&rdquo;
             </p>
             {attribution && (
-              <p className="mt-3 text-sm text-white/70">{attribution}</p>
+              <p className="mt-4 text-sm text-white/60">{attribution}</p>
             )}
           </div>
         )}
       </div>
 
       {/* Form panel */}
-      <div
-        className={cn(
-          "flex flex-1 flex-col bg-canvas lg:w-1/2",
-          "px-6 py-10 sm:px-12 lg:px-16 lg:py-12"
-        )}
-      >
-        <div className="mx-auto flex w-full max-w-md flex-1 flex-col justify-center">
-          {children}
+      <div className="relative flex min-h-screen flex-1 flex-col bg-[#FFF9F3] lg:w-1/2">
+        {/* Mobile image strip */}
+        <div className="relative h-36 shrink-0 lg:hidden">
+          <Image
+            src={imageSrc}
+            alt=""
+            fill
+            className="object-cover"
+            sizes="100vw"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-neutral-900/40 to-[#FFF9F3]" />
+        </div>
+
+        <div className="flex flex-1 flex-col px-6 pb-10 pt-6 sm:px-10 lg:px-14 lg:py-10 xl:px-20">
+          {/* Top bar */}
+          <div className="flex items-center justify-between">
+            <Link
+              href="/"
+              className="inline-flex items-center gap-1.5 text-sm font-medium text-neutral-500 transition-colors hover:text-neutral-900"
+            >
+              <ArrowLeft className="h-4 w-4" />
+              Home
+            </Link>
+            <Link href="/" className="lg:hidden">
+              <Wordmark className="text-lg" />
+            </Link>
+          </div>
+
+          <div className="mx-auto flex w-full max-w-[400px] flex-1 flex-col justify-center lg:mx-0 lg:max-w-[420px]">
+            {children}
+          </div>
+
+          <p className="mt-8 text-center text-xs text-neutral-400 lg:text-left">
+            © {new Date().getFullYear()} ChurchOS
+          </p>
         </div>
       </div>
     </div>

@@ -1,6 +1,7 @@
 import { MarketingPageShell } from "@/components/layout/marketing-page-shell";
-import { PageHero } from "@/components/landing/page-hero";
+import { PageHeroBanner } from "@/components/landing/page-hero-banner";
 import { LandingPricing } from "@/components/landing/sections";
+import { images } from "@/lib/images";
 import { getModulesForPage } from "@/lib/modules";
 import {
   PricingHowItWorks,
@@ -22,11 +23,11 @@ export default async function PricingPage() {
   const modules = await getModulesForPage();
 
   return (
-    <MarketingPageShell>
-      <PageHero
-        kicker="Pricing"
-        title="Module-based annual billing — no per-seat surprises"
-        description="Select exactly what your church needs. The picker below is the same one you'll use at onboarding — check modules, watch the total update, and pay annually through Paystack."
+    <MarketingPageShell heroOverlay>
+      <PageHeroBanner
+        title="Pricing"
+        description="Module-based annual billing — pick what you need, see your total upfront, pay through Paystack."
+        image={images.pricingHero}
       />
       <LandingPricing modules={modules} />
       <PricingHowItWorks />

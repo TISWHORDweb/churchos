@@ -1,6 +1,7 @@
 import { MarketingPageShell } from "@/components/layout/marketing-page-shell";
-import { PageHero } from "@/components/landing/page-hero";
+import { PageHeroBanner } from "@/components/landing/page-hero-banner";
 import { LandingFeatures } from "@/components/landing/sections";
+import { images } from "@/lib/images";
 import {
   FeaturesWorkflowDeepDives,
   FeaturesModuleDirectory,
@@ -19,11 +20,11 @@ export const metadata = {
 
 export default function FeaturesPage() {
   return (
-    <MarketingPageShell>
-      <PageHero
-        kicker="Features"
-        title="Every module maps to a workflow your team already runs"
-        description="Attendance on Sunday, reports on Monday, pastor invitations on Tuesday — ChurchOS is structured around the church week, not abstract software categories."
+    <MarketingPageShell heroOverlay>
+      <PageHeroBanner
+        title="Features"
+        description="Every module maps to a workflow your team already runs — attendance on Sunday, reports on Monday, pastor invitations on Tuesday."
+        image={images.featuresHero}
       />
       <LandingFeatures />
       <FeaturesWorkflowDeepDives />

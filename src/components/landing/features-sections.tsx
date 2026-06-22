@@ -96,13 +96,13 @@ export function FeaturesModuleDirectory() {
             return (
               <div
                 key={mod.name}
-                className="rounded-[8px] bg-white p-5 hairline border-neutral-200/80"
+                className="surface p-5 hairline border-neutral-200/80"
               >
                 <Icon className="h-4 w-4 text-gold-500" />
-                <h3 className="mt-3 text-sm font-semibold text-neutral-900">
+                <h3 className="mt-3 text-sm font-semibold text-foreground">
                   {mod.name}
                 </h3>
-                <p className="mt-1.5 text-xs leading-relaxed text-neutral-500">
+                <p className="mt-1.5 text-xs leading-relaxed text-muted-foreground">
                   {mod.description}
                 </p>
               </div>
@@ -145,10 +145,10 @@ export function FeaturesWorkflowDeepDives() {
             className={`grid items-center gap-8 lg:grid-cols-2 lg:gap-12 ${i % 2 === 1 ? "" : ""}`}
           >
             <div className={i % 2 === 1 ? "lg:order-2" : ""}>
-              <h3 className="text-xl font-semibold text-neutral-900">
+              <h3 className="text-xl font-semibold text-foreground">
                 {item.title}
               </h3>
-              <p className="mt-3 text-sm leading-relaxed text-neutral-500">
+              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
                 {item.body}
               </p>
             </div>
@@ -203,15 +203,15 @@ export function FeaturesRolesSection() {
           {roles.map((item) => (
             <div
               key={item.role}
-              className="rounded-[8px] bg-white p-6 hairline border-neutral-200/80"
+              className="surface p-6 hairline border-neutral-200/80"
             >
               <div className="flex items-center gap-2">
                 <Shield className="h-4 w-4 text-teal-400" />
-                <h3 className="text-sm font-semibold text-neutral-900">
+                <h3 className="text-sm font-semibold text-foreground">
                   {item.role}
                 </h3>
               </div>
-              <p className="mt-3 text-sm leading-relaxed text-neutral-500">
+              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
                 {item.access}
               </p>
             </div>
@@ -243,10 +243,10 @@ export function FeaturesIntegrations() {
           {integrations.map((item) => (
             <div
               key={item.name}
-              className="rounded-[8px] bg-white p-5 hairline border-neutral-200/80"
+              className="surface p-5 hairline border-neutral-200/80"
             >
-              <p className="text-sm font-semibold text-neutral-900">{item.name}</p>
-              <p className="mt-1.5 text-xs leading-relaxed text-neutral-500">
+              <p className="text-sm font-semibold text-foreground">{item.name}</p>
+              <p className="mt-1.5 text-xs leading-relaxed text-muted-foreground">
                 {item.desc}
               </p>
             </div>
@@ -255,10 +255,10 @@ export function FeaturesIntegrations() {
 
         <div className="mt-10 rounded-[8px] bg-teal-50 p-6 hairline border-teal-400/10 lg:flex lg:items-center lg:justify-between">
           <div>
-            <h3 className="text-base font-semibold text-neutral-900">
+            <h3 className="text-base font-semibold text-foreground">
               Reports export with your branding
             </h3>
-            <p className="mt-1 text-sm text-neutral-500">
+            <p className="mt-1 text-sm text-muted-foreground">
               Logo, primary color, and church name appear on PDFs and email
               templates automatically from your settings.
             </p>
@@ -273,13 +273,13 @@ export function FeaturesIntegrations() {
 export function FeaturesCTA() {
   return (
     <section className="px-6 pb-20 lg:pb-28">
-      <div className="mx-auto max-w-6xl rounded-[12px] bg-white p-8 hairline border-neutral-200/80 lg:p-12">
+      <div className="mx-auto max-w-6xl surface-lg p-8 hairline border-neutral-200/80 lg:p-12">
         <div className="lg:flex lg:items-center lg:justify-between">
           <div className="max-w-lg">
-            <h2 className="text-xl font-semibold text-neutral-900">
+            <h2 className="text-xl font-semibold text-foreground">
               See how modules fit your church
             </h2>
-            <p className="mt-2 text-sm text-neutral-500">
+            <p className="mt-2 text-sm text-muted-foreground">
               Use the pricing picker to select modules and see your annual total
               — same experience as onboarding.
             </p>
